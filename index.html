@@ -3,25 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>معاينة نماذج المنيو الرقمي | Digital Menus Interactive Demo</title>
-  <meta name="description" content="6 تصاميم احترافية لقوائم الطعام والمطاعم والكافيهات مع إمكانية المعاينة الحية على جميع الأجهزة">
-  <meta property="og:title" content="معاينة نماذج المنيو الرقمي | Digital Menus Demo">
-  <meta property="og:description" content="استعرض 6 تصميمات منيوهات تفاعلية للمطاعم والكافيهات جاهزة للاستخدام والطلب.">
+  <title>معاينة قوائم الطعام | Restaurant Menus Demo</title>
+  <meta name="description" content="نماذج وتصاميم قوائم طعام تفاعلية احترافية للمطاعم والكافيهات">
+  <meta property="og:title" content="معاينة قوائم الطعام | Restaurant Menus Demo">
+  <meta property="og:description" content="استعرض 6 تصميمات منيوهات تفاعلية للمطاعم والكافيهات.">
   <meta property="og:image" content="images/olivo-breakfast.jpg">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Alexandria:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Tajawal:wght@600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --primary: #3b82f6;
-      --primary-dark: #1d4ed8;
-      --accent: #06b6d4;
-      --topbar-bg: #0f172a;
-      --topbar-border: #1e293b;
+      --bar-bg: #0f172a;
+      --bar-border: #1e293b;
       --body-bg: #0b1120;
       --text: #f8fafc;
       --text-muted: #94a3b8;
@@ -31,18 +29,18 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html, body {
       height: 100%;
       width: 100%;
       overflow: hidden;
-      font-family: 'Cairo', sans-serif;
+      font-family: 'Cairo', 'Tajawal', sans-serif;
       background-color: var(--body-bg);
       color: var(--text);
     }
 
-    /* Fullscreen App Layout */
     .app-container {
       display: flex;
       flex-direction: column;
@@ -51,389 +49,89 @@
       overflow: hidden;
     }
 
-    /* Top Envato-Style Demo Bar */
-    .envato-topbar {
-      background: rgba(15, 23, 42, 0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--topbar-border);
-      height: 60px;
+    /* Minimalist Top Switcher Bar */
+    .menu-switcher-bar {
+      background: rgba(15, 23, 42, 0.98);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--bar-border);
+      height: 56px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
+      justify-content: center;
+      padding: 0 12px;
       z-index: 1000;
       flex-shrink: 0;
-      transition: transform 0.3s ease;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
 
-    .envato-topbar.hidden {
-      transform: translateY(-100%);
-      margin-bottom: -60px;
+    .menu-switcher-bar::-webkit-scrollbar {
+      display: none;
     }
 
-    /* Left Brand & Selector */
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-pill {
+    .tabs-wrapper {
       display: flex;
       align-items: center;
       gap: 8px;
+      padding: 4px 0;
+    }
+
+    .menu-tab {
       background: #1e293b;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-weight: 800;
-      font-size: 13px;
-      color: #38bdf8;
       border: 1px solid #334155;
-    }
-
-    .menu-selector-dropdown {
-      background: #1e293b;
-      color: #fff;
-      border: 1px solid #334155;
-      padding: 7px 12px;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    .menu-selector-dropdown:hover, .menu-selector-dropdown:focus {
-      border-color: var(--primary);
-    }
-
-    /* Center: Device Switcher (Desktop Only) */
-    .device-switcher-bar {
-      display: flex;
-      align-items: center;
-      background: #090e1a;
-      padding: 3px;
-      border-radius: 10px;
-      border: 1px solid #1e293b;
-      gap: 4px;
-    }
-
-    .dev-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 12.5px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .dev-btn.active, .dev-btn:hover {
-      background: #1e293b;
-      color: #38bdf8;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    /* Right Action Buttons */
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-action {
-      background: #1e293b;
-      color: #f1f5f9;
-      border: 1px solid #334155;
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-family: inherit;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-
-    .btn-action:hover {
-      background: #334155;
-      color: #fff;
-    }
-
-    .btn-cta {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #fff;
-      border: none;
+      color: #94a3b8;
       padding: 7px 16px;
-      border-radius: 8px;
+      border-radius: 30px;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
       font-family: inherit;
+      white-space: nowrap;
+      transition: all 0.2s ease;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-      transition: all 0.2s;
     }
 
-    .btn-cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.45);
+    .menu-tab:hover {
+      background: #2a384f;
+      color: #f8fafc;
+      border-color: #475569;
     }
 
-    /* Main Viewport Area */
-    .viewport-stage {
+    .menu-tab.active {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Full Viewport Frame */
+    .menu-viewport {
       flex: 1;
       width: 100%;
-      height: calc(100vh - 60px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      background: #090e1a;
-      overflow: hidden;
-    }
-
-    /* Responsive Frame Wrappers */
-    .screen-mockup {
-      width: 100%;
-      height: 100%;
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    /* Mobile Mockup (iPhone-like on Desktop) */
-    .screen-mockup.mode-mobile {
-      width: 395px;
-      height: 844px;
-      max-height: 92%;
-      background: #1e293b;
-      border-radius: 46px;
-      border: 10px solid #283347;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255,255,255,0.1);
-      position: relative;
-      padding-top: 24px;
-    }
-
-    /* Notch on Mobile Mockup */
-    .screen-mockup.mode-mobile::before {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 110px;
-      height: 18px;
-      background: #283347;
-      border-radius: 10px;
-      z-index: 20;
-    }
-
-    /* Tablet Mockup */
-    .screen-mockup.mode-tablet {
-      width: 768px;
-      height: 94%;
-      background: #1e293b;
-      border-radius: 24px;
-      border: 10px solid #283347;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-    }
-
-    /* Desktop Full View */
-    .screen-mockup.mode-desktop {
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-      border: none;
-      box-shadow: none;
-    }
-
-    .main-iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: inherit;
+      height: calc(100vh - 56px);
       background-color: #faf7f2;
-      display: block;
-    }
-
-    /* Floating Bar on Mobile Devices */
-    .mobile-bottom-bar {
-      display: none;
-      position: fixed;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 30px;
-      padding: 6px 12px;
-      z-index: 2000;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      gap: 6px;
-      align-items: center;
-      max-width: 95vw;
-      overflow-x: auto;
-    }
-
-    .mob-menu-btn {
-      background: transparent;
-      border: none;
-      color: #94a3b8;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 10px;
-      border-radius: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-
-    .mob-menu-btn.active {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
-    }
-
-    /* Fullscreen Toggle Floating Badge */
-    .floating-fullscreen-btn {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(8px);
-      border: 1px solid #334155;
-      color: #38bdf8;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 2100;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    /* Modal for QR / Share */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(6px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 3000;
-      padding: 20px;
-    }
-
-    .modal-card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 16px;
-      max-width: 400px;
-      width: 100%;
-      padding: 24px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
       position: relative;
     }
 
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      background: #334155;
-      border: none;
-      color: #fff;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .qr-box {
-      width: 180px;
-      height: 180px;
-      margin: 16px auto;
-      background: #fff;
-      padding: 10px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .qr-box img {
+    .menu-iframe {
       width: 100%;
       height: 100%;
+      border: none;
+      display: block;
+      background-color: #faf7f2;
     }
 
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #10b981;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 13.5px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      display: none;
-      z-index: 4000;
-      animation: fadeIn 0.3s;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Mobile Screen Adjustments */
-    @media (max-width: 768px) {
-      .envato-topbar {
-        display: none;
+    @media (max-width: 600px) {
+      .menu-switcher-bar {
+        justify-content: flex-start;
+        padding: 0 10px;
       }
-      .viewport-stage {
-        height: 100vh;
-      }
-      .screen-mockup {
-        width: 100% !important;
-        height: 100% !important;
-        border: none !important;
-        border-radius: 0 !important;
-        padding-top: 0 !important;
-      }
-      .screen-mockup.mode-mobile::before {
-        display: none;
-      }
-      .mobile-bottom-bar {
-        display: flex;
+      .menu-tab {
+        padding: 6px 12px;
+        font-size: 12px;
       }
     }
   </style>
@@ -442,228 +140,93 @@
 
   <div class="app-container">
 
-    <!-- Top Envato-Style Toolbar (Desktop & Tablet) -->
-    <header class="envato-topbar" id="topBar">
-      
-      <!-- Left: Logo & Menu Dropdown -->
-      <div class="topbar-left">
-        <div class="brand-pill">
-          <span>🍽️</span>
-          <span>نماذج المنيو الرقمي</span>
-        </div>
-
-        <select class="menu-selector-dropdown" id="menuSelect" onchange="switchMenu(this.value)">
-          <option value="0">🌿 1. OLIVO (مطبخ متوسطي)</option>
-          <option value="1">🥢 2. ZEN (فيوجن وسوشي)</option>
-          <option value="2">☕ 3. DAILY CUP (كافيه ومخبوزات)</option>
-          <option value="3">🔥 4. GRILL STATION (برجر وجريل)</option>
-          <option value="4">⚓ 5. BLUE OCEAN (مأكولات بحرية)</option>
-          <option value="5">🥩 6. PRIME (ستيك هاوس فاخر)</option>
-        </select>
-      </div>
-
-      <!-- Center: Device Switcher (Desktop, Tablet, Mobile) -->
-      <div class="device-switcher-bar">
-        <button class="dev-btn active" id="btnDevDesktop" onclick="setDeviceMode('desktop')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-          كمبيوتر
+    <!-- Only the Menu Switcher Tabs -->
+    <header class="menu-switcher-bar">
+      <div class="tabs-wrapper">
+        <button class="menu-tab active" onclick="switchMenu(0)">
+          <span>🌿</span>
+          <span>1. OLIVO</span>
         </button>
-        <button class="dev-btn" id="btnDevTablet" onclick="setDeviceMode('tablet')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-          تابلت
+
+        <button class="menu-tab" onclick="switchMenu(1)">
+          <span>🥢</span>
+          <span>2. ZEN</span>
         </button>
-        <button class="dev-btn" id="btnDevMobile" onclick="setDeviceMode('mobile')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-          موبايل
+
+        <button class="menu-tab" onclick="switchMenu(2)">
+          <span>☕</span>
+          <span>3. DAILY CUP</span>
+        </button>
+
+        <button class="menu-tab" onclick="switchMenu(3)">
+          <span>🔥</span>
+          <span>4. GRILL STATION</span>
+        </button>
+
+        <button class="menu-tab" onclick="switchMenu(4)">
+          <span>⚓</span>
+          <span>5. BLUE OCEAN</span>
+        </button>
+
+        <button class="menu-tab" onclick="switchMenu(5)">
+          <span>🥩</span>
+          <span>6. PRIME</span>
         </button>
       </div>
-
-      <!-- Right: Share, Fullscreen, and Contact CTA -->
-      <div class="topbar-right">
-        <button class="btn-action" onclick="openQrModal()" title="تجربة المنيو على الموبايل عبر الباركود">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-          QR الموبايل
-        </button>
-        
-        <button class="btn-action" onclick="copyShareLink()" title="نسخ رابط المنيو الحالي">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-          مشاركة
-        </button>
-
-        <button class="btn-action" onclick="toggleFullscreen()" title="عرض بكامل الشاشة وإخفاء الشريط">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-          ملء الشاشة
-        </button>
-
-        <a href="https://wa.me/?text=مرحباً،%20أود%20طلب%20تصميم%20منيو%20مشابه%20لهذا%20النموذج" target="_blank" class="btn-cta">
-          <span>طلب هذا التصميم</span>
-          <span>⚡</span>
-        </a>
-      </div>
-
     </header>
 
-    <!-- Floating button to restore topbar when in fullscreen -->
-    <button class="floating-fullscreen-btn" id="btnRestoreBar" onclick="toggleFullscreen()" title="إظهار شريط التحكم">
-      ✕
-    </button>
-
-    <!-- Main Viewport Area -->
-    <main class="viewport-stage">
-      <div class="screen-mockup mode-desktop" id="mockupContainer">
-        <iframe id="menuIframe" class="main-iframe" src="menu-1-olivo.html"></iframe>
-      </div>
+    <!-- Fullscreen Menu Viewport -->
+    <main class="menu-viewport">
+      <iframe id="activeMenuIframe" class="menu-iframe" src="menu-1-olivo.html"></iframe>
     </main>
 
-    <!-- Floating Mobile Bottom Switcher (Only appears on actual Mobile devices) -->
-    <nav class="mobile-bottom-bar" id="mobileBottomBar">
-      <button class="mob-menu-btn active" onclick="switchMenu(0)">🌿 Olivo</button>
-      <button class="mob-menu-btn" onclick="switchMenu(1)">🥢 Zen</button>
-      <button class="mob-menu-btn" onclick="switchMenu(2)">☕ Daily Cup</button>
-      <button class="mob-menu-btn" onclick="switchMenu(3)">🔥 Grill</button>
-      <button class="mob-menu-btn" onclick="switchMenu(4)">⚓ Ocean</button>
-      <button class="mob-menu-btn" onclick="switchMenu(5)">🥩 Prime</button>
-    </nav>
-
   </div>
-
-  <!-- QR Code Modal -->
-  <div class="modal-overlay" id="qrModal" onclick="closeQrModal(event)">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeQrModal()">✕</button>
-      <h3 style="font-size: 18px; margin-bottom: 6px;">📱 جرب المنيو على هاتفك</h3>
-      <p style="font-size: 13px; color: var(--text-muted);">امسح الباركود بكاميرا الموبايل لفتح المنيو كأنه QR مطعم حقيقي</p>
-      <div class="qr-box">
-        <img id="qrImg" src="" alt="QR Code">
-      </div>
-      <button class="btn-cta" style="width: 100%; justify-content: center;" onclick="copyShareLink()">نسخ رابط المنيو</button>
-    </div>
-  </div>
-
-  <!-- Toast Notification -->
-  <div class="toast" id="toastMsg">تم نسخ الرابط بنجاح! 📋</div>
 
   <script>
     const menus = [
-      { id: 'olivo', name: 'OLIVO - Mediterranean Kitchen', file: 'menu-1-olivo.html' },
-      { id: 'zen', name: 'ZEN - Asian Fusion', file: 'menu-2-zen.html' },
-      { id: 'daily-cup', name: 'DAILY CUP - Cafe', file: 'menu-3-daily-cup.html' },
-      { id: 'grill', name: 'GRILL STATION', file: 'menu-4-grill-station.html' },
-      { id: 'blue-ocean', name: 'BLUE OCEAN - Seafood', file: 'menu-5-blue-ocean.html' },
-      { id: 'prime', name: 'PRIME - Steakhouse', file: 'menu-6-prime-steakhouse.html' }
+      { id: 'olivo', file: 'menu-1-olivo.html' },
+      { id: 'zen', file: 'menu-2-zen.html' },
+      { id: 'daily-cup', file: 'menu-3-daily-cup.html' },
+      { id: 'grill', file: 'menu-4-grill-station.html' },
+      { id: 'blue-ocean', file: 'menu-5-blue-ocean.html' },
+      { id: 'prime', file: 'menu-6-prime-steakhouse.html' }
     ];
 
-    let currentMenuIdx = 0;
-    let isFullscreenMode = false;
+    let currentIdx = 0;
 
-    // Detect initial screen size and URL hash
     function init() {
-      // Check if hash matches any menu
       const hash = window.location.hash.replace('#', '').toLowerCase();
       const hashIdx = menus.findIndex(m => m.id === hash);
       if (hashIdx !== -1) {
-        currentMenuIdx = hashIdx;
+        switchMenu(hashIdx, false);
       }
-
-      // If opening on a tablet or desktop, default view mode
-      if (window.innerWidth <= 768) {
-        // Mobile naturally loads full viewport
-        setDeviceMode('desktop');
-      } else {
-        // Desktop default
-        setDeviceMode('desktop');
-      }
-
-      switchMenu(currentMenuIdx, false);
     }
 
     function switchMenu(idx, updateHash = true) {
-      idx = parseInt(idx);
-      currentMenuIdx = idx;
-      const targetMenu = menus[idx];
-      
-      const iframe = document.getElementById('menuIframe');
-      iframe.src = targetMenu.file;
+      currentIdx = idx;
+      const target = menus[idx];
+      document.getElementById('activeMenuIframe').src = target.file;
 
-      // Update dropdown
-      document.getElementById('menuSelect').value = idx;
-
-      // Update mobile bottom bar active button
-      const mobBtns = document.querySelectorAll('.mob-menu-btn');
-      mobBtns.forEach((btn, i) => {
-        if (i === idx) btn.classList.add('active');
-        else btn.classList.remove('active');
+      const tabs = document.querySelectorAll('.menu-tab');
+      tabs.forEach((tab, i) => {
+        if (i === idx) {
+          tab.classList.add('active');
+          tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        } else {
+          tab.classList.remove('active');
+        }
       });
 
       if (updateHash) {
-        window.history.replaceState(null, null, '#' + targetMenu.id);
+        window.history.replaceState(null, null, '#' + target.id);
       }
     }
 
-    function setDeviceMode(mode) {
-      const container = document.getElementById('mockupContainer');
-      const btns = {
-        desktop: document.getElementById('btnDevDesktop'),
-        tablet: document.getElementById('btnDevTablet'),
-        mobile: document.getElementById('btnDevMobile')
-      };
-
-      Object.values(btns).forEach(b => b.classList.remove('active'));
-      if (btns[mode]) btns[mode].classList.add('active');
-
-      container.className = 'screen-mockup mode-' + mode;
-    }
-
-    function toggleFullscreen() {
-      isFullscreenMode = !isFullscreenMode;
-      const bar = document.getElementById('topBar');
-      const restoreBtn = document.getElementById('btnRestoreBar');
-
-      if (isFullscreenMode) {
-        bar.classList.add('hidden');
-        restoreBtn.style.display = 'flex';
-      } else {
-        bar.classList.remove('hidden');
-        restoreBtn.style.display = 'none';
-      }
-    }
-
-    function openQrModal() {
-      const currentUrl = window.location.href;
-      const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentUrl)}`;
-      document.getElementById('qrImg').src = qrApi;
-      document.getElementById('qrModal').style.display = 'flex';
-    }
-
-    function closeQrModal(e) {
-      document.getElementById('qrModal').style.display = 'none';
-    }
-
-    function copyShareLink() {
-      const currentUrl = window.location.href;
-      navigator.clipboard.writeText(currentUrl).then(() => {
-        showToast('تم نسخ الرابط بنجاح! 📋');
-        closeQrModal();
-      }).catch(() => {
-        showToast('تم تحديد الرابط للمشاركة');
-      });
-    }
-
-    function showToast(text) {
-      const toast = document.getElementById('toastMsg');
-      toast.innerText = text;
-      toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.display = 'none';
-      }, 3000);
-    }
-
-    // Initialize on load
     window.addEventListener('DOMContentLoaded', init);
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '').toLowerCase();
       const idx = menus.findIndex(m => m.id === hash);
-      if (idx !== -1 && idx !== currentMenuIdx) {
+      if (idx !== -1 && idx !== currentIdx) {
         switchMenu(idx, false);
       }
     });
