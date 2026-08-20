@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>GRILL STATION | قائمة البرجر والمأكولات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Alexandria:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #d1cbc1;
+      font-family: 'Alexandria', sans-serif;
+      color: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .menu-card {
+      width: 100%;
+      max-width: 460px;
+      background-color: #fbf8f2;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      padding: 24px 20px 16px;
+      border: 2px solid #222;
+      box-sizing: border-box;
+    }
+
+    /* Grungy inner frame */
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      border: 1px dashed rgba(0,0,0,0.15);
+      pointer-events: none;
+      border-radius: 2px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .flame-icon {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 2px;
+    }
+
+    .flame-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .brand-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .brand-title .station {
+      color: #F59E0B;
+      font-size: 24px;
+      letter-spacing: 3px;
+    }
+
+    .menu-badge {
+      font-family: 'Alexandria', sans-serif;
+      font-size: 11.5px;
+      letter-spacing: 3px;
+      color: #D97706;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    /* Section Category Headings */
+    .section-title-wrapper {
+      position: relative;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #F59E0B;
+      padding-bottom: 2px;
+    }
+
+    .section-title-line {
+      flex: 1;
+      height: 1.5px;
+      background-color: #F59E0B;
+      margin-right: 8px;
+      opacity: 0.5;
+    }
+
+    /* Burgers Section Grid */
+    .burgers-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+
+    .burgers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .burger-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .burger-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .burger-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: #111111;
+    }
+
+    .burger-price {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #111111;
+      white-space: nowrap;
+    }
+
+    .burger-desc {
+      font-size: 8.5px;
+      color: #666666;
+      margin-top: 1px;
+      line-height: 1.2;
+    }
+
+    /* 4 Stacked Burgers Images */
+    .burgers-photos {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .burger-img-box {
+      width: 100%;
+      height: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+      background-color: #eae5dc;
+    }
+
+    .burger-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .burger-img-box:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Side Dishes Section */
+    .sides-section {
+      margin-bottom: 14px;
+    }
+
+    .sides-title-center {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .sides-title-center::before, .sides-title-center::after {
+      content: '';
+      flex: 0 0 35px;
+      height: 1px;
+      background-color: #d1c8bc;
+    }
+
+    .sides-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .side-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .side-img-box {
+      width: 100%;
+      height: 56px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 4px;
+      background-color: #f1ebd9;
+    }
+
+    .side-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .side-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .side-price {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #444;
+      margin-top: 1px;
+    }
+
+    /* Drinks Yellow Card */
+    .drinks-card {
+      background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: #111111;
+      position: relative;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 6px rgba(245, 158, 11, 0.25);
+    }
+
+    .drinks-card-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 6px;
+      color: #1a1a1a;
+      letter-spacing: 1px;
+    }
+
+    .drinks-flex {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .drinks-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .drinks-list-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 12px;
+    }
+
+    .drink-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .drink-item .d-price {
+      font-weight: 800;
+      margin-right: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #1a1a1a;
+      color: #f7f7f7;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    
+    /* Mobile Responsive Auto-Fit */
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      .menu-card {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 20px 14px 16px !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .menu-card {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-card">
+    <!-- Header -->
+    <header class="header">
+      <div class="flame-icon">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 4 C32 4 40 18 36 28 C42 22 46 16 46 16 C46 16 52 26 48 38 C45 47 38 56 32 60 C26 56 19 47 16 38 C12 26 18 16 18 16 C18 16 22 22 28 28 C24 18 32 4 32 4 Z" fill="#F59E0B"/>
+          <path d="M32 20 C32 20 37 30 35 36 C38 32 40 28 40 28 C40 28 44 36 40 44 C38 50 34 54 32 56 C30 54 26 50 24 44 C20 36 24 28 24 28 C24 28 26 32 29 36 C27 30 32 20 32 20 Z" fill="#EF4444"/>
+          <path d="M32 36 C32 36 35 42 34 46 C35 44 36 42 36 42 C36 42 38 46 36 50 C35 52 33 54 32 55 C31 54 29 52 28 50 C26 46 28 42 28 42 C28 42 29 44 30 46 C29 42 32 36 32 36 Z" fill="#FDE047"/>
+        </svg>
+      </div>
+      <div class="brand-title">
+        <span>GRILL</span>
+        <span class="station">STATION</span>
+      </div>
+      <div class="menu-badge">• MENU •</div>
+    </header>
+
+    <!-- Section 1: البرجر -->
+    <div class="section-title-wrapper">
+      <span class="section-title">البرجر</span>
+      <div class="section-title-line"></div>
+    </div>
+
+    <section class="burgers-grid">
+      <div class="burgers-list">
+        <div class="burger-item">
+          <div class="burger-header">
+            <span class="burger-name">كلاسيك برجر</span>
+            <span class="burger-price">90 ج</span>
+          </div>
+          <p class="burger-desc">لحم بقري، خس، طماطم، مخلل، صوص</p>
+        </div>
+
+        <div class="burger-item">
+          <div class="burger-header">
+            <span class="burger-name">تشيز برجر</span>
+            <span class="burger-price">105 ج</span>
+          </div>
+          <p class="burger-desc">لحم بقري، جبنة شيدر، مخلل، صوص</p>
+        </div>
+
+        <div class="burger-item">
+          <div class="burger-header">
+            <span class="burger-name">دبل برجر</span>
+            <span class="burger-price">130 ج</span>
+          </div>
+          <p class="burger-desc">قطعتين لحم، جبنة، بصل، صوص حار</p>
+        </div>
+
+        <div class="burger-item">
+          <div class="burger-header">
+            <span class="burger-name">دجاج كرسبي</span>
+            <span class="burger-price">95 ج</span>
+          </div>
+          <p class="burger-desc">دجاج مقلي، خس، مايونيز</p>
+        </div>
+      </div>
+
+      <!-- Right 4 Stacked Burger Photos -->
+      <div class="burgers-photos">
+        <div class="burger-img-box">
+          <img src="images/grill-burger-classic.jpg" alt="كلاسيك برجر">
+        </div>
+        <div class="burger-img-box">
+          <img src="images/grill-burger-cheese.jpg" alt="تشيز برجر">
+        </div>
+        <div class="burger-img-box">
+          <img src="images/grill-burger-double.jpg" alt="دبل برجر">
+        </div>
+        <div class="burger-img-box">
+          <img src="images/grill-burger-crispy.jpg" alt="دجاج كرسبي">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: الأطباق الجانبية -->
+    <section class="sides-section">
+      <div class="sides-title-center">الأطباق الجانبية</div>
+      <div class="sides-row">
+        <div class="side-card">
+          <div class="side-img-box">
+            <img src="images/grill-fries.jpg" alt="بطاطس">
+          </div>
+          <span class="side-name">بطاطس</span>
+          <span class="side-price">45 ج</span>
+        </div>
+
+        <div class="side-card">
+          <div class="side-img-box">
+            <img src="images/grill-onionrings.jpg" alt="حلقات بصل">
+          </div>
+          <span class="side-name">حلقات بصل</span>
+          <span class="side-price">45 ج</span>
+        </div>
+
+        <div class="side-card">
+          <div class="side-img-box">
+            <img src="images/grill-tenders.jpg" alt="أصابع دجاج">
+          </div>
+          <span class="side-name">أصابع دجاج</span>
+          <span class="side-price">55 ج</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: المشروبات Yellow Box -->
+    <div class="drinks-card">
+      <div class="drinks-card-title">المشروبات</div>
+      <div class="drinks-flex">
+        <div class="drinks-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+            <line x1="6" y1="2" x2="6" y2="4"></line>
+            <line x1="10" y1="2" x2="10" y2="4"></line>
+            <line x1="14" y1="2" x2="14" y2="4"></line>
+          </svg>
+        </div>
+        <div class="drinks-list-grid">
+          <div class="drink-item">
+            <span>مشروب غازي</span>
+            <span class="d-price">25 ج</span>
+          </div>
+          <div class="drink-item">
+            <span>عصير باتش</span>
+            <span class="d-price">35 ج</span>
+          </div>
+          <div class="drink-item">
+            <span>عصير برتقال</span>
+            <span class="d-price">35 ج</span>
+          </div>
+          <div class="drink-item">
+            <span>مياه معدنية</span>
+            <span class="d-price">20 ج</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      شكراً لزيارتكم
+    </footer>
+  </div>
+
+</body>
+</html>

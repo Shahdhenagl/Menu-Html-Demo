@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ZEN - Asian Fusion | قائمة الطعام</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Readex+Pro:wght@400;500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #dedede;
+      font-family: 'Readex Pro', sans-serif;
+      color: #222222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .menu-card {
+      width: 100%;
+      max-width: 460px;
+      background-color: #fafafa;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+      padding: 30px 24px 18px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .enso-logo {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 6px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .enso-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .kanji-char {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 24px;
+      color: #111;
+      font-weight: 700;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: #111111;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px;
+      letter-spacing: 3.5px;
+      color: #555555;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .menu-divider {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
+      letter-spacing: 4px;
+      color: #888888;
+      margin-top: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .menu-divider::before, .menu-divider::after {
+      content: '';
+      width: 25px;
+      height: 1.5px;
+      background-color: #888;
+    }
+
+    /* Category Headings */
+    .category-title {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    /* Section Layout */
+    .section-row {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 14px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .items-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .item-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .item-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .item-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      font-size: 8.5px;
+      color: #777777;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* Dark Stone Dish Images Column */
+    .photos-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .dish-thumb {
+      width: 100%;
+      height: 48px;
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: #181818;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+      position: relative;
+    }
+
+    .dish-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .dish-thumb:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Drinks & Ink Art Section */
+    .drinks-section {
+      margin-bottom: 16px;
+    }
+
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .matcha-art-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .matcha-img {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border: 2px solid #222;
+      z-index: 2;
+    }
+
+    .matcha-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Ink splash decorative behind matcha */
+    .ink-splash {
+      position: absolute;
+      width: 140px;
+      height: 100px;
+      opacity: 0.85;
+      z-index: 1;
+      pointer-events: none;
+      right: -20px;
+      bottom: -15px;
+    }
+
+    /* Bottom Brush Footer */
+    .footer-bar {
+      margin-top: 10px;
+      background: linear-gradient(90deg, #111111 0%, #252525 50%, #111111 100%);
+      color: #f1f1f1;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 18px 18px 4px 4px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    
+    /* Mobile Responsive Auto-Fit */
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      .menu-card {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 20px 14px 16px !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .menu-card {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-card">
+    <!-- Header -->
+    <header class="header">
+      <div class="enso-logo">
+        <svg class="enso-circle" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 50,8 A 42,42 0 1 0 88,38" stroke="#111111" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 88,38 A 42,42 0 0 0 74,18" stroke="#111111" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+        <span class="kanji-char">禪</span>
+      </div>
+      <h1 class="brand-title">ZEN</h1>
+      <p class="brand-sub">ASIAN FUSION</p>
+      <div class="menu-divider">MENU</div>
+    </header>
+
+    <!-- Section 1: المقبلات -->
+    <div class="category-title">المقبلات</div>
+    <section class="section-row">
+      <div class="items-container">
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">سبرينج رولز</span>
+            <span class="item-price">65 ج</span>
+          </div>
+          <p class="item-desc">خضار طازجة مع صوص سويت تشيلي</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">جياوزا دجاج</span>
+            <span class="item-price">70 ج</span>
+          </div>
+          <p class="item-desc">قطع دجاج مع الخضار وصلصة الصويا</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">إدامامي</span>
+            <span class="item-price">45 ج</span>
+          </div>
+          <p class="item-desc">فول صويا مسلوق مع ملح البحر</p>
+        </div>
+      </div>
+
+      <!-- Right 3 Stacked Dish Photos on dark plates -->
+      <div class="photos-stack">
+        <div class="dish-thumb">
+          <img src="images/zen-springrolls.jpg" alt="سبرينج رولز">
+        </div>
+        <div class="dish-thumb">
+          <img src="images/zen-gyoza.jpg" alt="جياوزا دجاج">
+        </div>
+        <div class="dish-thumb">
+          <img src="images/zen-edamame.jpg" alt="إدامامي">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: الأطباق الرئيسية -->
+    <div class="category-title">الأطباق الرئيسية</div>
+    <section class="section-row">
+      <div class="items-container">
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">نودلز دجاج</span>
+            <span class="item-price">125 ج</span>
+          </div>
+          <p class="item-desc">نودلز مع الدجاج والخضار</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">سالمون ترياكي</span>
+            <span class="item-price">165 ج</span>
+          </div>
+          <p class="item-desc">سالمون مشوي مع صوص الترياكي</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">سوشي مشكل</span>
+            <span class="item-price">145 ج</span>
+          </div>
+          <p class="item-desc">8 قطع سوشي متنوعة</p>
+        </div>
+      </div>
+
+      <!-- Right 3 Stacked Dish Photos -->
+      <div class="photos-stack">
+        <div class="dish-thumb">
+          <img src="images/zen-noodles.jpg" alt="نودلز دجاج">
+        </div>
+        <div class="dish-thumb">
+          <img src="images/zen-teriyaki.jpg" alt="سالمون ترياكي">
+        </div>
+        <div class="dish-thumb">
+          <img src="images/zen-sushi.jpg" alt="سوشي مشكل">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: المشروبات -->
+    <div class="category-title" style="margin-bottom: 8px;">المشروبات</div>
+    <section class="drinks-section">
+      <div class="drinks-grid">
+        <div class="items-container">
+          <div class="item-block">
+            <div class="item-line">
+              <span class="item-name">شاي أخضر</span>
+              <span class="item-price">35 ج</span>
+            </div>
+          </div>
+
+          <div class="item-block">
+            <div class="item-line">
+              <span class="item-name">ليمونادة يابانية</span>
+              <span class="item-price">40 ج</span>
+            </div>
+          </div>
+
+          <div class="item-block">
+            <div class="item-line">
+              <span class="item-name">مياه معدنية</span>
+              <span class="item-price">20 ج</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matcha bowl with ink splash art -->
+        <div class="matcha-art-box">
+          <svg class="ink-splash" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 10,60 C 40,20 120,10 180,50 C 195,60 170,90 140,80 C 100,70 60,110 20,80 Z" fill="#111" opacity="0.15"/>
+            <path d="M 30,70 C 60,30 110,40 160,65 C 130,85 80,75 40,95 Z" fill="#2d3820" opacity="0.25"/>
+          </svg>
+          <div class="matcha-img">
+            <img src="images/zen-matcha.jpg" alt="شاي أخضر ماتشا">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-bar">
+      شكراً لزيارتكم
+    </footer>
+  </div>
+
+</body>
+</html>

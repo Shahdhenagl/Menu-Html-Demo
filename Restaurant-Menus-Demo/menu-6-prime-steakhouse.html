@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PRIME - Steakhouse | قائمة اللحوم والمأكولات الفاخرة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Tajawal:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #cac7c2;
+      font-family: 'Tajawal', sans-serif;
+      color: #222222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .menu-card {
+      width: 100%;
+      max-width: 460px;
+      background-color: #faf9f6;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+      position: relative;
+      overflow: hidden;
+      padding: 28px 22px 16px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .bull-logo {
+      width: 44px;
+      height: 38px;
+      margin: 0 auto 4px;
+      color: #222222;
+    }
+
+    .bull-logo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: #1a1a1a;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 8px;
+      letter-spacing: 4.5px;
+      color: #666666;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .menu-divider {
+      font-family: 'Cinzel', serif;
+      font-size: 11.5px;
+      letter-spacing: 3.5px;
+      color: #887355;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    /* Category Headings */
+    .category-title {
+      text-align: center;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #1f2421;
+      margin-bottom: 10px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .category-title::before, .category-title::after {
+      content: '';
+      flex: 0 0 25px;
+      height: 1px;
+      background-color: #d1c5b4;
+    }
+
+    /* Section Grid */
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 12px;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+
+    .items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .item-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .item-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1a1a;
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      font-size: 8.5px;
+      color: #777777;
+      margin-top: 1px;
+      line-height: 1.25;
+    }
+
+    /* Photos Stack */
+    .photos-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dish-img-box {
+      width: 100%;
+      height: 46px;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+      background-color: #eae5de;
+    }
+
+    .dish-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .dish-img-box:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #232323;
+      color: #ded8ce;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .footer span {
+      color: #9c7c4e;
+    }
+
+    
+    /* Mobile Responsive Auto-Fit */
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      .menu-card {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 20px 14px 16px !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .menu-card {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-card">
+    <!-- Header -->
+    <header class="header">
+      <div class="bull-logo">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.5 5C20.5 4.5 18 6 17 7.5C15.5 6.5 13.8 6 12 6C10.2 6 8.5 6.5 7 7.5C6 6 3.5 4.5 2.5 5C1.5 5.5 1 7.5 2 9C3 10.5 5 11 6 11.5C6.2 13 6.8 14.5 7.8 15.6C8.8 16.7 10.3 17.5 12 17.5C13.7 17.5 15.2 16.7 16.2 15.6C17.2 14.5 17.8 13 18 11.5C19 11 21 10.5 22 9C23 7.5 22.5 5.5 21.5 5ZM12 15.5C10.6 15.5 9.5 14.4 9.5 13C9.5 11.6 10.6 10.5 12 10.5C13.4 10.5 14.5 11.6 14.5 13C14.5 14.4 13.4 15.5 12 15.5Z"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">PRIME</h1>
+      <p class="brand-sub">STEAKHOUSE</p>
+      <div class="menu-divider">• MENU •</div>
+    </header>
+
+    <!-- Section 1: المقبلات -->
+    <div class="category-title">المقبلات</div>
+    <section class="section-grid">
+      <div class="items-list">
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">سلطة سيزر</span>
+            <span class="item-price">65 ج</span>
+          </div>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">عش الغراب</span>
+            <span class="item-price">70 ج</span>
+          </div>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">خبز بالثوم</span>
+            <span class="item-price">45 ج</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 3 Photos -->
+      <div class="photos-stack">
+        <div class="dish-img-box">
+          <img src="images/prime-caesar.jpg" alt="سلطة سيزر">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/prime-mushrooms.jpg" alt="عش الغراب">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/prime-garlicbread.jpg" alt="خبز بالثوم">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: الأطباق الرئيسية -->
+    <div class="category-title">الأطباق الرئيسية</div>
+    <section class="section-grid">
+      <div class="items-list">
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">ستيك ريب آي</span>
+            <span class="item-price">250 ج</span>
+          </div>
+          <p class="item-desc">ستيك مشوي مع خضار مشوية</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">ستيك فيلية</span>
+            <span class="item-price">270 ج</span>
+          </div>
+          <p class="item-desc">ستيك فيلية مع صوص الفطر</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">ستيك دجاج</span>
+            <span class="item-price">145 ج</span>
+          </div>
+          <p class="item-desc">دجاج مشوي مع خضار وبطاطس</p>
+        </div>
+      </div>
+
+      <!-- Right 3 Steak Photos -->
+      <div class="photos-stack">
+        <div class="dish-img-box">
+          <img src="images/prime-ribeye.jpg" alt="ستيك ريب آي">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/prime-filet.jpg" alt="ستيك فيلية">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/prime-chicken.jpg" alt="ستيك دجاج">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: الإضافات -->
+    <div class="category-title">الإضافات</div>
+    <section class="section-grid" style="margin-bottom: 6px;">
+      <div class="items-list">
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">بطاطس مهروسة</span>
+            <span class="item-price">45 ج</span>
+          </div>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">أرز أبيض</span>
+            <span class="item-price">35 ج</span>
+          </div>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">خضار مشوية</span>
+            <span class="item-price">45 ج</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 2 Side Photos -->
+      <div class="photos-stack">
+        <div class="dish-img-box" style="height: 48px;">
+          <img src="images/prime-mashed.jpg" alt="بطاطس مهروسة">
+        </div>
+        <div class="dish-img-box" style="height: 48px;">
+          <img src="images/prime-veggies.jpg" alt="خضار مشوية">
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>&#10229;</span> شكراً لزيارتكم <span>&#10230;</span>
+    </footer>
+  </div>
+
+</body>
+</html>

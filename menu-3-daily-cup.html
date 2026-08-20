@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DAILY CUP - Cafe & Bakery | القائمة الرقمية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Tajawal:wght@400;500;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4A2B19;
+      --primary-light: #eeddc9;
+      --accent: #d97706;
+      --bg: #f5ede4;
+      --card-bg: #ffffff;
+      --text: #332014;
+      --text-muted: #7b6555;
+      --border: #e8d7c5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Tajawal', sans-serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      max-width: 520px;
+      background-color: #faf6f0;
+      min-height: 100vh;
+      box-shadow: 0 0 35px rgba(74, 43, 25, 0.12);
+      position: relative;
+      padding-bottom: 90px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Coffee Hero */
+    .header-hero {
+      position: relative;
+      background: linear-gradient(180deg, #4A2B19 0%, #2f190d 100%);
+      color: #faf6f0;
+      padding: 36px 20px 24px;
+      text-align: center;
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 8px 24px rgba(74, 43, 25, 0.3);
+      overflow: hidden;
+    }
+
+    .badge-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #faf6f0;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: #eeddc9;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .info-tags {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 11px;
+      color: #eeddc9;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #4ade80;
+      margin-left: 4px;
+    }
+
+    /* Sticky Nav */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 246, 240, 0.95);
+      backdrop-filter: blur(14px);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .sticky-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pill {
+      background-color: #eee0d0;
+      color: var(--primary);
+      text-decoration: none;
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-pill:hover, .nav-pill.active {
+      background-color: var(--primary);
+      color: #eeddc9;
+      box-shadow: 0 3px 10px rgba(74, 43, 25, 0.3);
+    }
+
+    /* Sections */
+    .menu-section {
+      padding: 24px 16px 8px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+    }
+
+    /* Cards */
+    .items-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dish-card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 3px 12px rgba(74, 43, 25, 0.04);
+      transition: transform 0.2s;
+    }
+
+    .dish-card:active {
+      transform: scale(0.98);
+    }
+
+    .dish-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .dish-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .dish-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .dish-price {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .dish-img-wrap {
+      width: 84px;
+      height: 84px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background-color: #ebe2d8;
+    }
+
+    .dish-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 480px;
+      background: rgba(47, 25, 13, 0.95);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 1000;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .bottom-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.1);
+      padding: 7px 14px;
+      border-radius: 16px;
+    }
+
+    .order-cta {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      padding: 8px 18px;
+      border-radius: 16px;
+      font-weight: 800;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 30px 20px 20px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Header Hero -->
+    <header class="header-hero">
+      <div class="badge-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#eeddc9">
+          <path d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5C22,3.89 21.1,3 20,3Z"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">DAILY CUP</h1>
+      <p class="brand-subtitle">SPECIALTY CAFE & BAKERY</p>
+      
+      <div class="info-tags">
+        <span><span class="status-dot"></span> مفتوح الآن</span>
+        <span>•</span>
+        <span>⭐ 4.9 (840+ تقييم)</span>
+        <span>•</span>
+        <span>☕ قهوة مختصة</span>
+      </div>
+    </header>
+
+    <!-- Sticky Nav -->
+    <nav class="sticky-nav">
+      <a href="#coffee" class="nav-pill active">☕ القهوة الساخنة</a>
+      <a href="#bakery" class="nav-pill">🥐 المخبوزات</a>
+      <a href="#sandwiches" class="nav-pill">🥪 الساندوتشات</a>
+      <a href="#cold-drinks" class="nav-pill">🧊 المشروبات الباردة</a>
+    </nav>
+
+    <!-- Section 1: القهوة -->
+    <section class="menu-section" id="coffee">
+      <div class="section-header">
+        <h2 class="section-title">☕ القهوة الساخنة</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">إسبريسو دبل شوت</h3>
+            <p class="dish-desc">بن برازيلي فاخر 100% أرابيكا مركز ومميز</p>
+            <span class="dish-price">50 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-latte.jpg" alt="إسبريسو" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">أمريكانو كلاسيك</h3>
+            <p class="dish-desc">إسبريسو غني مع الماء الساخن النقي</p>
+            <span class="dish-price">55 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-latte.jpg" alt="أمريكانو" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">كابتشينو إيطالي</h3>
+            <p class="dish-desc">إسبريسو مع الحليب المبخر ورغوة كريمية غنية ورشة كاكاو</p>
+            <span class="dish-price">65 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-latte.jpg" alt="كابتشينو" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">كافيه لاتيه</h3>
+            <p class="dish-desc">حليب مخفوق ناعم مع شوت إسبريسو ورسمة لاتيه آرت</p>
+            <span class="dish-price">65 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-latte.jpg" alt="لاتيه" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">موكا شوكولاتة</h3>
+            <p class="dish-desc">مزيج الإسبريسو مع الشوكولاتة البلجيكية والحليب</p>
+            <span class="dish-price">70 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-latte.jpg" alt="موكا" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">كراميل ماكياتو</h3>
+            <p class="dish-desc">حليب فانيلا مبخر مع الإسبريسو وصوص الكراميل اللذيذ</p>
+            <span class="dish-price">70 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-latte.jpg" alt="كراميل ماكياتو" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: المخبوزات -->
+    <section class="menu-section" id="bakery">
+      <div class="section-header">
+        <h2 class="section-title">🥐 المخبوزات والحلويات</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">كرواسان زبدة فرنسي</h3>
+            <p class="dish-desc">مخبوز يومياً بطبقات مقرمشة وهشة من الزبدة الطبيعية</p>
+            <span class="dish-price">45 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-croissant.jpg" alt="كرواسان زبدة" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">كرواسان شوكولاتة</h3>
+            <p class="dish-desc">محشو بشوكولاتة البندق الغنية والمذابة</p>
+            <span class="dish-price">55 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-croissant.jpg" alt="كرواسان شوكولاتة" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">تشيز كيك نيويورك</h3>
+            <p class="dish-desc">تشيز كيك كريمية كلاسيكية مع صوص التوت</p>
+            <span class="dish-price">70 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-cake.jpg" alt="تشيز كيك" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">كيك شوكولاتة فادج</h3>
+            <p class="dish-desc">كيك شوكولاتة داكنة غنية بطبقات الجناش الفاخرة</p>
+            <span class="dish-price">70 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-cake.jpg" alt="كيك شوكولاتة" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: الساندوتشات -->
+    <section class="menu-section" id="sandwiches">
+      <div class="section-header">
+        <h2 class="section-title">🥪 الساندوتشات</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">ساندويتش دجاج جريلد</h3>
+            <p class="dish-desc">دجاج مشوي، خس كرانشي، صوص سيزر في خبز البانيني</p>
+            <span class="dish-price">85 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-sandwich.jpg" alt="ساندويتش دجاج" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">ساندويتش تونة كلاسيك</h3>
+            <p class="dish-desc">تونة فاخرة، مايونيز خفيف، خس، طماطم وذرة حلوة</p>
+            <span class="dish-price">75 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-sandwich.jpg" alt="ساندويتش تونة" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">ساندويتش جبنة حلوم</h3>
+            <p class="dish-desc">حلوم مشوي على الجريل، خضار مشوية، صوص بيستو الريحان</p>
+            <span class="dish-price">85 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-sandwich.jpg" alt="ساندويتش حلوم" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: المشروبات الباردة -->
+    <section class="menu-section" id="cold-drinks">
+      <div class="section-header">
+        <h2 class="section-title">🧊 المشروبات الباردة</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">آيس لاتيه كراميل</h3>
+            <p class="dish-desc">إسبريسو مثلج مع الحليب وصوص الكراميل والثلج</p>
+            <span class="dish-price">65 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-icedlatte.jpg" alt="آيس لاتيه" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">موهيتو منعش</h3>
+            <p class="dish-desc">نعناع طازج، ليمون، صودا فوارة وثلج مجروش</p>
+            <span class="dish-price">60 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-icedlatte.jpg" alt="موهيتو" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">عصير برتقال فريش</h3>
+            <p class="dish-desc">عصير برتقال طبيعي معصور طازج</p>
+            <span class="dish-price">50 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/daily-icedlatte.jpg" alt="عصير برتقال" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer-note">
+      &#10229; شكراً لزيارتكم • DAILY CUP CAFE &#10230;
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+      <a href="tel:0123456789" class="bottom-btn">
+        <span>📞</span>
+        <span>اتصال</span>
+      </a>
+      
+      <a href="https://wa.me/?text=أود%20الطلب%20من%20كافيه%20DAILY%20CUP" target="_blank" class="bottom-btn order-cta">
+        <span>💬</span>
+        <span>اطلب واتساب</span>
+      </a>
+
+      <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="bottom-btn">
+        <span>⬆️</span>
+        <span>للأعلى</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('.menu-section');
+    const navPills = document.querySelectorAll('.nav-pill');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navPills.forEach(pill => {
+        pill.classList.remove('active');
+        if (pill.getAttribute('href') === '#' + current) {
+          pill.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

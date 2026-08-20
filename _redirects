@@ -1,0 +1,10 @@
+# Netlify Clean URLs for Menu Demos
+/olivo            /menu-1-olivo.html           200
+/zen              /menu-2-zen.html             200
+/daily-cup        /menu-3-daily-cup.html        200
+/grill            /menu-4-grill-station.html    200
+/blue-ocean       /menu-5-blue-ocean.html       200
+/prime            /menu-6-prime-steakhouse.html 200
+
+# Fallback
+/*                /index.html                  200

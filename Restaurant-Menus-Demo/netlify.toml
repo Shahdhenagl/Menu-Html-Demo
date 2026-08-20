@@ -1,0 +1,44 @@
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/olivo"
+  to = "/menu-1-olivo.html"
+  status = 200
+
+[[redirects]]
+  from = "/zen"
+  to = "/menu-2-zen.html"
+  status = 200
+
+[[redirects]]
+  from = "/daily-cup"
+  to = "/menu-3-daily-cup.html"
+  status = 200
+
+[[redirects]]
+  from = "/grill"
+  to = "/menu-4-grill-station.html"
+  status = 200
+
+[[redirects]]
+  from = "/blue-ocean"
+  to = "/menu-5-blue-ocean.html"
+  status = 200
+
+[[redirects]]
+  from = "/prime"
+  to = "/menu-6-prime-steakhouse.html"
+  status = 200

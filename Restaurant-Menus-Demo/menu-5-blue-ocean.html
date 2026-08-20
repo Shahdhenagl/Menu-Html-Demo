@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BLUE OCEAN - Seafood | قائمة المأكولات البحرية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Tajawal:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #d1dde6;
+      font-family: 'Tajawal', sans-serif;
+      color: #1e3a52;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .menu-card {
+      width: 100%;
+      max-width: 460px;
+      background-color: #fbfcff;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(14, 58, 93, 0.15);
+      position: relative;
+      overflow: hidden;
+      padding: 28px 22px 14px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .anchor-icon {
+      width: 38px;
+      height: 38px;
+      margin: 0 auto 4px;
+      color: #0E3A5D;
+    }
+
+    .anchor-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #0E3A5D;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 8.5px;
+      letter-spacing: 4px;
+      color: #2F7BA8;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .menu-divider {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: #0E3A5D;
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    /* Category Headings */
+    .category-title {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0E3A5D;
+      margin-bottom: 10px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .category-title::before, .category-title::after {
+      content: '';
+      flex: 0 0 25px;
+      height: 1px;
+      background-color: #bad3e6;
+    }
+
+    /* Section Grid: items on right, photos on left */
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 12px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+
+    /* Images Column */
+    .photos-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dish-img-box {
+      width: 100%;
+      height: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(14, 58, 93, 0.12);
+      background-color: #e5edf2;
+    }
+
+    .dish-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .dish-img-box:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Items Column */
+    .items-column {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .item-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .item-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0E3A5D;
+    }
+
+    .item-price {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0E3A5D;
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      font-size: 8.5px;
+      color: #63869e;
+      margin-top: 1px;
+      line-height: 1.25;
+    }
+
+    /* Drinks Section */
+    .drinks-box {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .drinks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .drink-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0E3A5D;
+    }
+
+    /* Wave Background Graphic at Bottom */
+    .ocean-waves {
+      margin-top: 6px;
+      width: 100%;
+      height: 40px;
+      display: block;
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(90deg, #0E3A5D 0%, #1A4E7A 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 7px 0;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    
+    /* Mobile Responsive Auto-Fit */
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      .menu-card {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 20px 14px 16px !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .menu-card {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-card">
+    <!-- Header -->
+    <header class="header">
+      <div class="anchor-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C9.79 2 8 3.79 8 6C8 7.85 9.27 9.4 11 9.87V12.18C7.05 12.63 4 16 4 20.08H6C6 16.73 8.69 14.04 12 14.04C15.31 14.04 18 16.73 18 20.08H20C20 16 16.95 12.63 13 12.18V9.87C14.73 9.4 16 7.85 16 6C16 3.79 14.21 2 12 2M12 4C13.1 4 14 4.9 14 6C14 7.1 13.1 8 12 8C10.9 8 10 7.1 10 6C10 4.9 10.9 4 12 4Z"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">BLUE OCEAN</h1>
+      <p class="brand-sub">SEAFOOD</p>
+      <div class="menu-divider">• MENU •</div>
+    </header>
+
+    <!-- Section 1: المقبلات -->
+    <div class="category-title">المقبلات</div>
+    <section class="section-grid">
+      <!-- Photos Stack -->
+      <div class="photos-stack">
+        <div class="dish-img-box">
+          <img src="images/blue-calamari.jpg" alt="كاليماري مقلي">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/blue-shrimp-fried.jpg" alt="جمبري مقلي">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/blue-soup.jpg" alt="شوربة سي فود">
+        </div>
+      </div>
+
+      <!-- Items List -->
+      <div class="items-column">
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">كاليماري مقلي</span>
+            <span class="item-price">85 ج</span>
+          </div>
+          <p class="item-desc">حلقات كاليماري مقلية مع صوص تارتار</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">جمبري مقلي</span>
+            <span class="item-price">95 ج</span>
+          </div>
+          <p class="item-desc">جمبري مقلي مقرمش مع صوص كوكتيل</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">شوربة سي فود</span>
+            <span class="item-price">70 ج</span>
+          </div>
+          <p class="item-desc">شوربة سي فود بالكريمة</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: الأطباق الرئيسية -->
+    <div class="category-title">الأطباق الرئيسية</div>
+    <section class="section-grid">
+      <!-- Photos Stack -->
+      <div class="photos-stack">
+        <div class="dish-img-box">
+          <img src="images/blue-fish.jpg" alt="سمك دنيس مشوي">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/blue-shrimp-grilled.jpg" alt="جمبري مشوي">
+        </div>
+        <div class="dish-img-box">
+          <img src="images/blue-pasta.jpg" alt="باستا سي فود">
+        </div>
+      </div>
+
+      <!-- Items List -->
+      <div class="items-column">
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">سمك دنيس مشوي</span>
+            <span class="item-price">180 ج</span>
+          </div>
+          <p class="item-desc">سمك دنيس مشوي مع خضار مشوية</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">جمبري مشوي</span>
+            <span class="item-price">195 ج</span>
+          </div>
+          <p class="item-desc">جمبري مشوي مع أرز صيادية</p>
+        </div>
+
+        <div class="item-block">
+          <div class="item-line">
+            <span class="item-name">باستا سي فود</span>
+            <span class="item-price">150 ج</span>
+          </div>
+          <p class="item-desc">باستا بالمأكولات البحرية وصوص طماطم</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: المشروبات -->
+    <div class="drinks-box">
+      <div class="category-title" style="margin-bottom: 6px;">المشروبات</div>
+      <div class="drinks-list">
+        <div class="drink-line">
+          <span>ليمون بالنعناع</span>
+          <span>40 ج</span>
+        </div>
+        <div class="drink-line">
+          <span>عصير مانجو</span>
+          <span>45 ج</span>
+        </div>
+        <div class="drink-line">
+          <span>مياه معدنية</span>
+          <span>20 ج</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ocean Wave SVG Art -->
+    <svg class="ocean-waves" viewBox="0 0 400 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 25 C80 5 120 35 200 18 C280 2 320 30 400 12 L400 40 L0 40 Z" fill="#b9daf0" opacity="0.5"/>
+      <path d="M0 30 C70 15 130 38 210 22 C290 8 340 32 400 18 L400 40 L0 40 Z" fill="#589bc8" opacity="0.6"/>
+      <path d="M0 35 C60 22 140 36 220 28 C300 20 350 34 400 25 L400 40 L0 40 Z" fill="#0E3A5D" opacity="0.8"/>
+    </svg>
+
+    <!-- Footer -->
+    <footer class="footer">
+      شكراً لزيارتكم
+    </footer>
+  </div>
+
+</body>
+</html>

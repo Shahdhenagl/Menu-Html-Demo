@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>OLIVO - Mediterranean Kitchen | القائمة الرقمية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Tajawal:wght@400;500;700;800;900&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4A6028;
+      --primary-dark: #334423;
+      --primary-light: #dbe4d3;
+      --accent: #b48c56;
+      --bg: #f5f2eb;
+      --card-bg: #ffffff;
+      --text: #2c3325;
+      --text-muted: #737c6b;
+      --border: #e8e3d8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Tajawal', sans-serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      max-width: 520px;
+      background-color: #faf7f2;
+      min-height: 100vh;
+      box-shadow: 0 0 35px rgba(0,0,0,0.08);
+      position: relative;
+      padding-bottom: 90px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Premium Header Cover */
+    .header-hero {
+      position: relative;
+      background: linear-gradient(180deg, #3d5020 0%, #283715 100%);
+      color: #faf7f2;
+      padding: 36px 20px 24px;
+      text-align: center;
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 8px 24px rgba(40, 55, 21, 0.25);
+      overflow: hidden;
+    }
+
+    .header-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .brand-logo-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 8px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: #faf7f2;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 8.5px;
+      letter-spacing: 3px;
+      color: #c4d7b2;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .info-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #dbe4d3;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #4ade80;
+    }
+
+    /* Sticky Category Nav Tabs */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .sticky-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pill {
+      background-color: #ede7dc;
+      color: var(--primary-dark);
+      text-decoration: none;
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-pill:hover, .nav-pill.active {
+      background-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(74, 96, 40, 0.3);
+    }
+
+    /* Category Section */
+    .menu-section {
+      padding: 24px 16px 8px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+    }
+
+    /* Dish Cards */
+    .items-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dish-card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .dish-card:active {
+      transform: scale(0.98);
+    }
+
+    .dish-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .dish-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #1f2619;
+    }
+
+    .dish-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .dish-price {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    .dish-img-wrap {
+      width: 84px;
+      height: 84px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      background-color: #eae5dc;
+    }
+
+    .dish-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .dish-card:hover .dish-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    /* Floating Action Bar at Bottom */
+    .bottom-bar {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 480px;
+      background: rgba(36, 48, 20, 0.95);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 1000;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .bottom-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.1);
+      padding: 7px 14px;
+      border-radius: 16px;
+      transition: background 0.2s;
+    }
+
+    .bottom-btn:hover {
+      background: var(--primary);
+    }
+
+    .order-cta {
+      background: linear-gradient(135deg, #78a23d 0%, #4A6028 100%);
+      padding: 8px 18px;
+      border-radius: 16px;
+      font-weight: 800;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Footer */
+    .footer-note {
+      text-align: center;
+      padding: 30px 20px 20px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Header Hero -->
+    <header class="header-hero">
+      <div class="brand-logo-icon">
+        <svg width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 8 C22 18 14 30 14 42 C14 52 22 58 32 58 C42 58 50 52 50 42 C50 30 42 18 32 8 Z" stroke="#faf7f2" stroke-width="2.5" opacity="0.4"/>
+          <ellipse cx="26" cy="22" rx="7" ry="3.5" transform="rotate(-35 26 22)" fill="#a3e635"/>
+          <ellipse cx="38" cy="26" rx="7" ry="3.5" transform="rotate(30 38 26)" fill="#86efac"/>
+          <ellipse cx="28" cy="38" rx="8" ry="4" transform="rotate(-20 28 38)" fill="#bef264"/>
+          <ellipse cx="37" cy="42" rx="7" ry="3.5" transform="rotate(25 37 42)" fill="#86efac"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">OLIVO</h1>
+      <p class="brand-subtitle">MEDITERRANEAN KITCHEN</p>
+      
+      <div class="info-bar">
+        <span><span class="status-dot"></span> مفتوح الآن</span>
+        <span>•</span>
+        <span>⭐ 4.9 (520+ تقييم)</span>
+        <span>•</span>
+        <span>🌿 مأكولات متوسطية</span>
+      </div>
+    </header>
+
+    <!-- Sticky Navigation Tabs -->
+    <nav class="sticky-nav">
+      <a href="#breakfast" class="nav-pill active">🍳 الفطور</a>
+      <a href="#appetizers" class="nav-pill">🥗 المقبلات</a>
+      <a href="#mains" class="nav-pill">🥘 الأطباق الرئيسية</a>
+      <a href="#drinks" class="nav-pill">🍹 المشروبات</a>
+    </nav>
+
+    <!-- Section 1: الفطور -->
+    <section class="menu-section" id="breakfast">
+      <div class="section-header">
+        <h2 class="section-title">🍳 الفطور</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">فطار شرقي</h3>
+            <p class="dish-desc">ريفي: فول، فلافل، جبنة، سلطة، خبز طازج</p>
+            <span class="dish-price">120 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-breakfast.jpg" alt="فطار شرقي" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">أومليت جبنة</h3>
+            <p class="dish-desc">أومليت بالجبنة البيضاء مع الخضار الطازجة</p>
+            <span class="dish-price">95 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-breakfast.jpg" alt="أومليت جبنة" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">بان كيك</h3>
+            <p class="dish-desc">بان كيك ذهبي هش مع عسل النحل و فواكه الموسم</p>
+            <span class="dish-price">85 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-breakfast.jpg" alt="بان كيك" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: المقبلات -->
+    <section class="menu-section" id="appetizers">
+      <div class="section-header">
+        <h2 class="section-title">🥗 المقبلات</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">حمص بالزيت والكمون</h3>
+            <p class="dish-desc">حمص كريمي مع زيت الزيتون البكر والخبز</p>
+            <span class="dish-price">60 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-hummus.jpg" alt="حمص" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">بابا غنوج</h3>
+            <p class="dish-desc">باذنجان مشوي مدخن مع الطحينة وزيت الزيتون</p>
+            <span class="dish-price">60 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-hummus.jpg" alt="بابا غنوج" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">تبولة لبنانية</h3>
+            <p class="dish-desc">بقدونس طازج مفروم مع البرغل، الطماطم والليمون</p>
+            <span class="dish-price">55 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-pasta.jpg" alt="تبولة" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">سلطة يونانية</h3>
+            <p class="dish-desc">خضار مشكلة مع جبنة الفيتا، الزيتون وزيت الزيتون</p>
+            <span class="dish-price">65 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-pasta.jpg" alt="سلطة يونانية" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: الأطباق الرئيسية -->
+    <section class="menu-section" id="mains">
+      <div class="section-header">
+        <h2 class="section-title">🥘 الأطباق الرئيسية</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">باستا ألفريدو</h3>
+            <p class="dish-desc">باستا كريمية غنية مع الدجاج المشوي والفطر الطازج</p>
+            <span class="dish-price">135 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-pasta.jpg" alt="باستا ألفريدو" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">دجاج مشوي على الفحم</h3>
+            <p class="dish-desc">يقدم مع خضار سوتيه وأرز بسمتي مبهر</p>
+            <span class="dish-price">150 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-salmon.jpg" alt="دجاج مشوي" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">سلمون مشوي نرويجي</h3>
+            <p class="dish-desc">مع خضار مشوية وصوص الليمون والأعشاب</p>
+            <span class="dish-price">175 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-salmon.jpg" alt="سلمون مشوي" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: المشروبات -->
+    <section class="menu-section" id="drinks">
+      <div class="section-header">
+        <h2 class="section-title">🍹 المشروبات</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">عصير برتقال فريش</h3>
+            <p class="dish-desc">طازج ومعصور 100% طبيعي بدون سكر مضاف</p>
+            <span class="dish-price">45 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-juice.jpg" alt="عصير برتقال" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">ليمون بالنعناع المنعش</h3>
+            <p class="dish-desc">ليمون طازج مع النعناع الأخضر والثلج المجروش</p>
+            <span class="dish-price">40 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/olivo-juice.jpg" alt="ليمون بالنعناع" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">مياه معدنية طبيعية</h3>
+            <p class="dish-desc">مياه نقية باردة</p>
+            <span class="dish-price">20 ج.م</span>
+          </div>
+          <div class="dish-img-wrap" style="display: flex; align-items: center; justify-content: center; background: #e0e7d7;">
+            <span style="font-size: 32px;">💧</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Note -->
+    <div class="footer-note">
+      • شكراً لزيارتكم •
+    </div>
+
+    <!-- Floating Action Bar at Bottom -->
+    <div class="bottom-bar">
+      <a href="tel:0123456789" class="bottom-btn">
+        <span>📞</span>
+        <span>اتصال</span>
+      </a>
+      
+      <a href="https://wa.me/?text=أود%20الطلب%20من%20منيو%20OLIVO" target="_blank" class="bottom-btn order-cta">
+        <span>💬</span>
+        <span>اطلب واتساب</span>
+      </a>
+
+      <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="bottom-btn">
+        <span>⬆️</span>
+        <span>للأعلى</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    // Highlight active nav pill on scroll
+    const sections = document.querySelectorAll('.menu-section');
+    const navPills = document.querySelectorAll('.nav-pill');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navPills.forEach(pill => {
+        pill.classList.remove('active');
+        if (pill.getAttribute('href') === '#' + current) {
+          pill.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

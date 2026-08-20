@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DAILY CUP - Cafe | قائمة المشروبات والمأكولات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Tajawal:wght@400;500;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #d9d2c9;
+      font-family: 'Tajawal', sans-serif;
+      color: #3b2a1d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 10px;
+    }
+
+    .menu-card {
+      width: 100%;
+      max-width: 460px;
+      background-color: #faf6f0;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+      position: relative;
+      overflow: hidden;
+      padding: 26px 20px 16px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .badge-logo {
+      width: 100px;
+      height: 60px;
+      margin: 0 auto 4px;
+      background-color: #4A2B19;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #f7ede2;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .badge-logo svg {
+      width: 20px;
+      height: 20px;
+      fill: #e8d5c4;
+      margin-bottom: 2px;
+    }
+
+    .badge-logo .title {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .badge-logo .subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 6.5px;
+      letter-spacing: 2px;
+      color: #cbb29c;
+      margin-top: 2px;
+    }
+
+    .menu-badge {
+      display: inline-block;
+      margin-top: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: #4A2B19;
+      font-weight: 700;
+    }
+
+    /* Section Category Pill */
+    .section-pill {
+      background-color: #eeddc9;
+      color: #4A2B19;
+      display: inline-block;
+      padding: 2.5px 22px;
+      border-radius: 16px;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      border: 1px solid #e0c8b0;
+    }
+
+    /* Section Layout */
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: start;
+    }
+
+    .items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .item-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #3b2a1d;
+    }
+
+    .item-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: #3b2a1d;
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      font-size: 8.5px;
+      color: #7b6555;
+      margin-top: 1px;
+      line-height: 1.2;
+    }
+
+    /* Images */
+    .images-column {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .img-box {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #ebe2d8;
+    }
+
+    .img-box.tall-coffee {
+      height: 98px;
+    }
+
+    .img-box.bakery-img {
+      height: 52px;
+    }
+
+    .img-box.sandwich-img {
+      height: 72px;
+    }
+
+    .img-box.cold-drink-img {
+      height: 68px;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .img-box:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #3e2415;
+      color: #eeddc9;
+      text-align: center;
+      padding: 6px 0;
+      border-radius: 4px;
+      margin-top: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .footer span {
+      color: #cbb29c;
+    }
+
+    
+    /* Mobile Responsive Auto-Fit */
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      .menu-card {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 20px 14px 16px !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .menu-card {
+        box-shadow: none;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-card">
+    <!-- Header -->
+    <header class="header">
+      <div class="badge-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5C22,3.89 21.1,3 20,3Z"/>
+        </svg>
+        <span class="title">DAILY CUP</span>
+        <span class="subtitle">CAFE</span>
+      </div>
+      <div class="menu-badge">• MENU •</div>
+    </header>
+
+    <!-- Section 1: القهوة -->
+    <section class="section-grid">
+      <div class="items-list">
+        <span class="section-pill">القهوة</span>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">إسبريسو</span>
+            <span class="item-price">50</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">أمريكانو</span>
+            <span class="item-price">55</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">كابتشينو</span>
+            <span class="item-price">65</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">لاتيه</span>
+            <span class="item-price">65</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">موكا</span>
+            <span class="item-price">70</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">كراميل ماكياتو</span>
+            <span class="item-price">70</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Coffee Cup Photo -->
+      <div class="images-column">
+        <div class="img-box tall-coffee">
+          <img src="images/daily-latte.jpg" alt="كوب قهوة لاتيه">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: المخبوزات -->
+    <section class="section-grid">
+      <div class="items-list">
+        <span class="section-pill">المخبوزات</span>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">كرواسان زبدة</span>
+            <span class="item-price">45</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">كرواسان شوكولاتة</span>
+            <span class="item-price">55</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">تشيز كيك</span>
+            <span class="item-price">70</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">كيك شوكولاتة</span>
+            <span class="item-price">70</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 Bakery Photos -->
+      <div class="images-column">
+        <div class="img-box bakery-img">
+          <img src="images/daily-croissant.jpg" alt="كرواسان">
+        </div>
+        <div class="img-box bakery-img">
+          <img src="images/daily-cake.jpg" alt="كيك شوكولاتة">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: الساندوتشات -->
+    <section class="section-grid">
+      <div class="items-list">
+        <span class="section-pill">الساندوتشات</span>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">ساندويتش دجاج</span>
+            <span class="item-price">85</span>
+          </div>
+          <p class="item-desc">دجاج مشوي، خس، صوص سيزر</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">ساندويتش تونة</span>
+            <span class="item-price">75</span>
+          </div>
+          <p class="item-desc">تونة، مايونيز، خس، طماطم</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">ساندويتش جبنة حلوم</span>
+            <span class="item-price">85</span>
+          </div>
+          <p class="item-desc">حلوم مشوي، خضار، صوص بيستو</p>
+        </div>
+      </div>
+
+      <!-- Sandwich Photo -->
+      <div class="images-column">
+        <div class="img-box sandwich-img">
+          <img src="images/daily-sandwich.jpg" alt="ساندويتش">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: المشروبات الباردة -->
+    <section class="section-grid" style="margin-bottom: 2px;">
+      <div class="items-list">
+        <span class="section-pill">المشروبات الباردة</span>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">آيس لاتيه</span>
+            <span class="item-price">65</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">موهيتو</span>
+            <span class="item-price">60</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">عصير برتقال</span>
+            <span class="item-price">50</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cold Drink Photo -->
+      <div class="images-column">
+        <div class="img-box cold-drink-img">
+          <img src="images/daily-icedlatte.jpg" alt="آيس لاتيه ومشروبات باردة">
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>&#10229;</span> شكراً لزيارتكم <span>&#10230;</span>
+    </footer>
+  </div>
+
+</body>
+</html>

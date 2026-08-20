@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PRIME - Steakhouse | القائمة الرقمية الفاخرة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Tajawal:wght@400;500;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --card-bg: #161920;
+      --card-border: #282e3b;
+      --primary: #c59b27;
+      --accent: #d4af37;
+      --text: #f1f5f9;
+      --text-muted: #8e9bb0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      font-family: 'Tajawal', sans-serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      max-width: 520px;
+      background-color: #12141a;
+      min-height: 100vh;
+      box-shadow: 0 0 45px rgba(0,0,0,0.8);
+      position: relative;
+      padding-bottom: 90px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Steakhouse Hero */
+    .header-hero {
+      position: relative;
+      background: radial-gradient(circle at center, #24221d 0%, #0d0e12 100%);
+      color: #fff;
+      padding: 36px 20px 24px;
+      text-align: center;
+      border-radius: 0 0 28px 28px;
+      border-bottom: 1px solid #332d20;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+      overflow: hidden;
+    }
+
+    .bull-badge {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 8px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 5px;
+      color: var(--accent);
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .info-tags {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      margin-left: 4px;
+    }
+
+    /* Sticky Nav */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(18, 20, 26, 0.96);
+      backdrop-filter: blur(14px);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .sticky-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pill {
+      background-color: #1e222d;
+      color: #cbd5e1;
+      text-decoration: none;
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+      border: 1px solid var(--card-border);
+    }
+
+    .nav-pill:hover, .nav-pill.active {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: #111;
+      box-shadow: 0 4px 14px rgba(197, 155, 39, 0.4);
+    }
+
+    /* Sections */
+    .menu-section {
+      padding: 24px 16px 8px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, #383120 0%, transparent 100%);
+    }
+
+    /* Cards */
+    .items-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dish-card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .dish-card:active {
+      transform: scale(0.98);
+    }
+
+    .dish-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .dish-name {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .dish-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .dish-price {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .dish-img-wrap {
+      width: 84px;
+      height: 84px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background-color: #202633;
+      border: 1px solid var(--card-border);
+    }
+
+    .dish-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 480px;
+      background: rgba(18, 20, 26, 0.95);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      z-index: 1000;
+      border: 1px solid var(--card-border);
+    }
+
+    .bottom-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #232836;
+      padding: 7px 14px;
+      border-radius: 16px;
+    }
+
+    .order-cta {
+      background: linear-gradient(135deg, #d4af37 0%, #a68218 100%);
+      color: #111;
+      padding: 8px 18px;
+      border-radius: 16px;
+      font-weight: 900;
+      box-shadow: 0 3px 12px rgba(212, 175, 55, 0.4);
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 30px 20px 20px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Header Hero -->
+    <header class="header-hero">
+      <div class="bull-badge">
+        <svg width="28" height="24" viewBox="0 0 24 24" fill="#d4af37">
+          <path d="M21.5 5C20.5 4.5 18 6 17 7.5C15.5 6.5 13.8 6 12 6C10.2 6 8.5 6.5 7 7.5C6 6 3.5 4.5 2.5 5C1.5 5.5 1 7.5 2 9C3 10.5 5 11 6 11.5C6.2 13 6.8 14.5 7.8 15.6C8.8 16.7 10.3 17.5 12 17.5C13.7 17.5 15.2 16.7 16.2 15.6C17.2 14.5 17.8 13 18 11.5C19 11 21 10.5 22 9C23 7.5 22.5 5.5 21.5 5ZM12 15.5C10.6 15.5 9.5 14.4 9.5 13C9.5 11.6 10.6 10.5 12 10.5C13.4 10.5 14.5 11.6 14.5 13C14.5 14.4 13.4 15.5 12 15.5Z"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">PRIME</h1>
+      <p class="brand-subtitle">PREMIUM STEAKHOUSE</p>
+      
+      <div class="info-tags">
+        <span><span class="live-dot"></span> قطع لحوم فاخرة</span>
+        <span>•</span>
+        <span>⭐ 4.9 (1.5k+ تقييم)</span>
+        <span>•</span>
+        <span>🥩 أنجوس وبلاك أنجوس</span>
+      </div>
+    </header>
+
+    <!-- Sticky Nav -->
+    <nav class="sticky-nav">
+      <a href="#appetizers" class="nav-pill active">🥗 المقبلات الراقية</a>
+      <a href="#steaks" class="nav-pill">🥩 أطباق الستيك</a>
+      <a href="#sides" class="nav-pill">🥔 الإضافات والجانبيات</a>
+    </nav>
+
+    <!-- Section 1: المقبلات -->
+    <section class="menu-section" id="appetizers">
+      <div class="section-header">
+        <h2 class="section-title">🥗 المقبلات الفاخرة</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">سلطة سيزر كلاسيك</h3>
+            <p class="dish-desc">خس روماني، خبز محمص بالأعشاب، جبنة بارميزان وصوص السيزر</p>
+            <span class="dish-price">65 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-caesar.jpg" alt="سلطة سيزر" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">عش الغراب بالثوم والزبدة</h3>
+            <p class="dish-desc">فطر بري سوتيه مع زبدة الأعشاب والثوم والليمون</p>
+            <span class="dish-price">70 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-mushrooms.jpg" alt="عش الغراب" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">خبز بالثوم والجبنة</h3>
+            <p class="dish-desc">باجيت فرنسي محمص بزبدة الثوم وجبنة الموزاريلا الذائبة</p>
+            <span class="dish-price">45 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-garlicbread.jpg" alt="خبز بالثوم" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: الستيك -->
+    <section class="menu-section" id="steaks">
+      <div class="section-header">
+        <h2 class="section-title">🥩 أطباق الستيك المميزة</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">ستيك ريب آي بلاك أنجوس</h3>
+            <p class="dish-desc">قطعة ريب آي رخامية مشوية مع خضار مشوية وزبدة الأعشاب</p>
+            <span class="dish-price">250 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-ribeye.jpg" alt="ستيك ريب آي" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">ستيك فيلية تندرلوين</h3>
+            <p class="dish-desc">أطرى قطعة لحم فيليه مشوية مع صوص الفطر البني الفاخر</p>
+            <span class="dish-price">270 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-filet.jpg" alt="ستيك فيلية" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">ستيك دجاج جريلد برست</h3>
+            <p class="dish-desc">صدور دجاج متبلة مشوية على الجريل مع خضار سوتيه وبطاطس</p>
+            <span class="dish-price">145 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-chicken.jpg" alt="ستيك دجاج" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: الإضافات -->
+    <section class="menu-section" id="sides">
+      <div class="section-header">
+        <h2 class="section-title">🥔 الإضافات والجانبيات</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="items-grid">
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">بطاطس مهروسة كريمية</h3>
+            <p class="dish-desc">بطاطس بيوريه مع الزبدة والكريمة الغنية وجوزة الطيب</p>
+            <span class="dish-price">45 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-mashed.jpg" alt="بطاطس مهروسة" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">أرز أبيض بالزبدة</h3>
+            <p class="dish-desc">أرز بسمتي أبيض مطهو على البخار بالزبدة</p>
+            <span class="dish-price">35 ج.م</span>
+          </div>
+          <div class="dish-img-wrap" style="display: flex; align-items: center; justify-content: center; background: #202633;">
+            <span style="font-size: 30px;">🍚</span>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="dish-info">
+            <h3 class="dish-name">خضار مشوية بروفنسال</h3>
+            <p class="dish-desc">تشكيلة خضار موسمية مشوية بزيت الزيتون وإكليل الجبل</p>
+            <span class="dish-price">45 ج.م</span>
+          </div>
+          <div class="dish-img-wrap">
+            <img src="images/prime-veggies.jpg" alt="خضار مشوية" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer-note">
+      &#10229; شكراً لزيارتكم • PRIME STEAKHOUSE &#10230;
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+      <a href="tel:0123456789" class="bottom-btn">
+        <span>📞</span>
+        <span>اتصال</span>
+      </a>
+      
+      <a href="https://wa.me/?text=أود%20الطلب%20من%20PRIME%20STEAKHOUSE" target="_blank" class="bottom-btn order-cta">
+        <span>💬</span>
+        <span>اطلب واتساب</span>
+      </a>
+
+      <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="bottom-btn">
+        <span>⬆️</span>
+        <span>للأعلى</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('.menu-section');
+    const navPills = document.querySelectorAll('.nav-pill');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navPills.forEach(pill => {
+        pill.classList.remove('active');
+        if (pill.getAttribute('href') === '#' + current) {
+          pill.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
